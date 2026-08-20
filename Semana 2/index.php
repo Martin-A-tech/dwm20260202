@@ -44,12 +44,34 @@
             <a href="servicios.php">Ir a Servicios</a><br>
             <a href="productos.php">Ir a Producto</a><br>
             <a href="Contacto.php">Ir a Contacto</a><br>
+            <a href="hola.php">Ir a hola</a><br>
         </div>
+
+        <div class="container mt-3">
+            <h2>Stacked form</h2>
+            <form action="/action_page.php">
+                <div class="mb-3 mt-3">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+                </div>
+                <div class="mb-3">
+                    <label for="pwd">Password:</label>
+                    <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd">
+                </div>
+                <div class="form-check mb-3">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="remember"> Remember me
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+        
         <!--Footer-->
-        <div class="container-fluid bg-dark">
+        <div class="container-fluid bg-white">
             <div class="row">
                 <div class="col-4"></div>
-                <div class="col-4" style="color:white"><strong>MiEmpresa@2026</strong></div>
+                <div class="col-4" style="color:dark"><strong>Empresadelimpiezaa2micilio@unab</strong></div>
                 <div class="col-4"></div>
             </div>
         </div>
