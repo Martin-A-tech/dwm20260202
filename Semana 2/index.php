@@ -46,9 +46,9 @@
             <a href="Contacto.php">Ir a Contacto</a><br>
             <a href="hola.php">Ir a hola</a><br>
         </div>
-
+        <!--Container2--><!--hola-->
         <div class="container mt-3">
-            <h2>Stacked form</h2>
+            <h2>Ponga su mail</h2>
             <form action="/action_page.php">
                 <div class="mb-3 mt-3">
                     <label for="email">Email:</label>
@@ -66,7 +66,7 @@
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
-        
+
         <!--Footer-->
         <div class="container-fluid bg-white">
             <div class="row">
