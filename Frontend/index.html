@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panadería Dulce Hogar</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Encabezado con Carrito -->
+  <header class="p-3 bg-dark text-white d-flex justify-content-between align-items-center">
+    <h1>Panadería Dulce Hogar</h1>
+    <div id="cart-icon">🛒(0)</div>
+  </header>
+
+  <!-- Banner Ofertas -->
+  <section class="text-center bg-warning p-2">
+    <h2 id="offer-title">Oferta del día: Pan amasado recién horneado</h2>
+  </section>
+
+  <main class="container my-4">
+    <!-- Categorías -->
+    <section class="row text-center mb-4">
+      <div class="col-md-4"><button id="cat-panes" class="btn btn-primary w-100 mb-2">Panes</button></div>
+      <div class="col-md-4"><button id="cat-pasteles" class="btn btn-primary w-100 mb-2">Pasteles</button></div>
+      <div class="col-md-4"><button id="cat-facturas" class="btn btn-primary w-100 mb-2">Facturas</button></div>
+    </section>
+
+    <!-- Contenedor Carrusel / Productos -->
+    <section>
+      <h3>Productos en Galería</h3>
+      <div id="product-slider-container" class="slider-container"></div>
+    </section>
+
+    <!-- Formulario de Contacto -->
+    <section class="mt-5">
+      <h3>Contacto</h3>
+      <form id="contact-form" class="col-md-6">
+        <div class="mb-3">
+          <label for="contact-name" class="form-label">Nombre</label>
+          <input type="text" id="contact-name" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label for="contact-email" class="form-label">Email</label>
+          <input type="email" id="contact-email" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label for="contact-message" class="form-label">Mensaje</label>
+          <textarea id="contact-message" class="form-control" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-success">Enviar Mensaje</button>
+      </form>
+    </section>
+  </main>
+
+  <!-- Modal de Login (Bootstrap) -->
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form id="loginForm">
+          <div class="modal-header">
+            <h5 class="modal-title">Iniciar Sesión</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" id="email" class="form-control" required>
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Contraseña</label>
+              <input type="password" id="password" class="form-control" required>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-warning">Ingresar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
