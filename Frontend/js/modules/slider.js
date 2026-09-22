@@ -4,7 +4,6 @@ export const initSlider = () => {
   const sliderContainer = document.getElementById('product-slider-container');
   if (!sliderContainer) return;
 
-  // Catálogo completo con imágenes reales de repostería y panadería
   const productosDisponibles = [
     { id: 1, nombre: 'Pan Amasado Tradicional', precio: 1500, img: 'https://images.unsplash.com/photo-1598373182133-52452f7691ef?w=500' },
     { id: 2, nombre: 'Pan de Masa Madre', precio: 3500, img: 'https://images.unsplash.com/photo-1585478259715-876acc5be8eb?w=500' },
@@ -16,15 +15,12 @@ export const initSlider = () => {
     { id: 8, nombre: 'Berlín de Crema', precio: 1200, img: 'https://images.unsplash.com/photo-1612204071534-110037a50a31?w=500' }
   ];
 
-  // Limpiamos el contenedor por seguridad
   sliderContainer.innerHTML = '';
 
-  // Generamos cada tarjeta dinámicamente
   productosDisponibles.forEach((producto, index) => {
     const col = document.createElement('div');
     col.className = 'col-12 col-md-6 col-lg-3 mb-4';
 
-    // Etiqueta destacada alterna
     const badge = index % 3 === 0 ? '<span class="badge bg-danger position-absolute top-0 end-0 m-2 px-2 py-1 fs-6 rounded-pill">¡Destacado!</span>' : '';
 
     col.innerHTML = `
@@ -43,11 +39,9 @@ export const initSlider = () => {
       </div>
     `;
 
-    // Evento para agregar al carrito
     const btnAdd = col.querySelector('.btn-add');
     btnAdd.addEventListener('click', () => {
       addToCart(producto);
-      // Pequeña animación visual en el botón
       btnAdd.textContent = '¡Agregado! ✔️';
       btnAdd.classList.replace('btn-warning', 'btn-success');
       setTimeout(() => {
@@ -56,7 +50,6 @@ export const initSlider = () => {
       }, 1000);
     });
 
-    // Eventos Hover para animar la imagen vía JS (manipulación del DOM)
     const imgElement = col.querySelector('.product-img');
     col.addEventListener('mouseenter', () => {
       imgElement.style.transform = 'scale(1.15)';
@@ -69,8 +62,4 @@ export const initSlider = () => {
 
     sliderContainer.appendChild(col);
   });
-  
-  // Limpiamos el contenedor de botones extra si existe, ya que mostramos todo el catálogo
-  const btnContainer = document.getElementById('btn-container');
-  if (btnContainer) btnContainer.innerHTML = '';
 };

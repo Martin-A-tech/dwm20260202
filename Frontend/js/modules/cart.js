@@ -1,11 +1,16 @@
+// Obtener carrito guardado en el navegador o iniciar uno vacío
 export let cartItems = JSON.parse(localStorage.getItem('dulceHogarCart')) || [];
 
-const saveCart = () => localStorage.setItem('dulceHogarCart', JSON.stringify(cartItems));
+// Función interna para guardar
+const saveCart = () => {
+  localStorage.setItem('dulceHogarCart', JSON.stringify(cartItems));
+};
 
+// Actualiza el número del icono en el Navbar
 export const updateCartIcon = () => {
   const cartIcon = document.getElementById('cart-icon');
   if (!cartIcon) return;
-  // Actualizamos el número dentro del span
+  
   const spanNum = cartIcon.querySelector('span');
   if (spanNum) {
       spanNum.textContent = `(${cartItems.length})`;
@@ -14,6 +19,7 @@ export const updateCartIcon = () => {
   }
 };
 
+// Agrega un producto y anima el icono
 export const addToCart = (producto) => {
   cartItems.push(producto);
   saveCart();
@@ -29,6 +35,7 @@ export const addToCart = (producto) => {
   }
 };
 
+// Vacía el carrito por completo
 export const clearCart = () => {
   cartItems = [];
   saveCart();

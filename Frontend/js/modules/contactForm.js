@@ -6,7 +6,6 @@ export const initContactForm = () => {
 
   if (!contactForm) return;
 
-  // Limpiar errores visuales al escribir
   [contactName, contactEmail, contactMessage].forEach(input => {
     if(input) {
       input.addEventListener('input', () => {
@@ -23,7 +22,6 @@ export const initContactForm = () => {
       const emailValue = contactEmail.value.trim();
       const mensajeValue = contactMessage.value.trim();
 
-      // Validaciones con feedback visual
       if (nombreValue === '') {
         contactName.classList.add('is-invalid');
         throw new Error('El nombre no puede estar vacío.');
@@ -37,7 +35,6 @@ export const initContactForm = () => {
         throw new Error('El mensaje debe tener al menos 10 caracteres.');
       }
 
-      // 🌟 Reemplazar formulario por mensaje de éxito decorado
       contactForm.innerHTML = `
         <div class="alert alert-success text-center p-5 shadow-sm rounded-4 border-0" style="background-color: #d1e7dd;">
           <h2 class="fw-bold mb-3 text-success">¡Mensaje Enviado! 🥐</h2>

@@ -6,8 +6,8 @@ export const initLoginForm = () => {
   if (!loginForm || !emailInput || !passwordInput) return;
 
   emailInput.addEventListener('focus', () => {
-    emailInput.style.border = '2px solid #FFC107';
-    emailInput.style.boxShadow = '0 0 5px rgba(255, 193, 7, 0.5)';
+    emailInput.style.border = '2px solid #f59e0b';
+    emailInput.style.boxShadow = '0 0 5px rgba(245, 158, 11, 0.5)';
   });
 
   emailInput.addEventListener('blur', () => {
@@ -23,7 +23,7 @@ export const initLoginForm = () => {
       const passwordValue = passwordInput.value;
 
       if (!emailValue.includes('@') || !emailValue.includes('.')) {
-        throw new Error('El correo electrónico debe ser válido (ejemplo@correo.cl).');
+        throw new Error('El correo electrónico debe ser válido.');
       }
       if (passwordValue.length < 6) {
         throw new Error('La contraseña debe tener al menos 6 caracteres.');
@@ -41,7 +41,6 @@ export const initLoginForm = () => {
 
     } catch (error) {
       alert(`❌ Error de validación: ${error.message}`);
-      console.error('Error capturado:', error);
     }
   });
 };
