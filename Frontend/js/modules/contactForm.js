@@ -6,6 +6,15 @@ export const initContactForm = () => {
 
   if (!contactForm) return;
 
+  // Limpiar errores visuales al escribir
+  [contactName, contactEmail, contactMessage].forEach(input => {
+    if(input) {
+      input.addEventListener('input', () => {
+        input.classList.remove('is-invalid');
+      });
+    }
+  });
+
   contactForm.addEventListener('submit', (event) => {
     event.preventDefault();
 
@@ -14,21 +23,35 @@ export const initContactForm = () => {
       const emailValue = contactEmail.value.trim();
       const mensajeValue = contactMessage.value.trim();
 
+      // Validaciones con feedback visual
       if (nombreValue === '') {
+        contactName.classList.add('is-invalid');
         throw new Error('El nombre no puede estar vacío.');
       }
-      if (!emailValue.includes('@')) {
+      if (!emailValue.includes('@') || !emailValue.includes('.')) {
+        contactEmail.classList.add('is-invalid');
         throw new Error('Debes ingresar un correo electrónico válido.');
       }
       if (mensajeValue.length < 10) {
+        contactMessage.classList.add('is-invalid');
         throw new Error('El mensaje debe tener al menos 10 caracteres.');
       }
 
-      alert(`¡Gracias ${nombreValue}! Hemos recibido tu mensaje y te contactaremos a ${emailValue}.`);
-      contactForm.reset();
+      // 🌟 Reemplazar formulario por mensaje de éxito decorado
+      contactForm.innerHTML = `
+        <div class="alert alert-success text-center p-5 shadow-sm rounded-4 border-0" style="background-color: #d1e7dd;">
+          <h2 class="fw-bold mb-3 text-success">¡Mensaje Enviado! 🥐</h2>
+          <p class="fs-5 text-dark mb-4">
+            Gracias <strong>${nombreValue}</strong>. Hemos recibido tu consulta y te responderemos a <strong>${emailValue}</strong> lo antes posible.
+          </p>
+          <button class="btn btn-success rounded-pill px-4 py-2" onclick="location.reload()">
+            Enviar otro mensaje
+          </button>
+        </div>
+      `;
 
     } catch (error) {
-      alert(`❌ Error: ${error.message}`);
+      alert(`❌ Por favor corrige lo siguiente:\n${error.message}`);
     }
   });
 };

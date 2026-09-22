@@ -1,0 +1,52 @@
+/* Variables y estilos generales */
+:root {
+  --primary-color: #d97706; /* Tono panadería (naranja/dorado) */
+  --hover-color: #b45309;
+}
+
+body {
+  background-color: #fcfaf8;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Navbar y Carrito */
+.navbar-brand {
+  font-weight: 700;
+  color: var(--primary-color) !important;
+}
+#cart-icon {
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+  text-decoration: none;
+}
+#cart-icon:hover {
+  transform: scale(1.1);
+}
+
+/* Tarjetas de producto */
+.card-product {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: none;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+.card-product:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+}
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+}
+
+/* Carrusel */
+.carousel-item img {
+  height: 400px;
+  object-fit: cover;
+  filter: brightness(0.7);
+}
+.carousel-caption {
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  padding: 20px;
+}

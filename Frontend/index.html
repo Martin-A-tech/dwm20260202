@@ -4,58 +4,142 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Panadería Dulce Hogar</title>
+  <!-- Bootstrap 5 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
+  <!-- Archivo de estilos personalizado -->
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <!-- Encabezado con Carrito -->
-  <header class="p-3 bg-dark text-white d-flex justify-content-between align-items-center">
-    <h1>Panadería Dulce Hogar</h1>
-    <div id="cart-icon">🛒(0)</div>
+  <!-- ==========================================
+       NAVBAR (BARRA DE NAVEGACIÓN)
+       ========================================== -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top py-3">
+    <div class="container">
+      <a class="navbar-brand fw-bold text-warning" href="index.html">🥐 Dulce Hogar</a>
+      
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-center">
+          <li class="nav-item">
+            <a class="nav-link active" href="index.html">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#carta">Nuestra Carta</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contacto">Contacto</a>
+          </li>
+          <li class="nav-item ms-lg-3 mt-3 mt-lg-0">
+            <!-- Enlace al Carrito -->
+            <a href="carrito.html" id="cart-icon" class="btn btn-outline-warning d-flex align-items-center">
+              🛒 <span class="ms-1 fw-bold">(0)</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ==========================================
+       HERO / CARRUSEL PRINCIPAL
+       ========================================== -->
+  <header>
+    <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="4000">
+          <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=1200" class="d-block w-100 object-fit-cover" style="height: 50vh;" alt="Pan recién horneado">
+          <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 p-3 rounded">
+            <h2 id="offer-title" class="text-white">Oferta del día: Pan amasado recién horneado</h2>
+            <p class="text-light">Elaborado con masa madre y horneado a la perfección cada mañana.</p>
+          </div>
+        </div>
+        <div class="carousel-item" data-bs-interval="4000">
+          <img src="https://images.unsplash.com/photo-1551404973-7bb0b8893d39?w=1200" class="d-block w-100 object-fit-cover" style="height: 50vh;" alt="Pasteles">
+          <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 p-3 rounded">
+            <h2 class="text-white">Torta de chocolate 20% OFF</h2>
+            <p class="text-light">Ideal para celebraciones. Solo por hoy llevando tu tarjeta cliente frecuente.</p>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      </button>
+    </div>
   </header>
 
-  <!-- Banner Ofertas -->
-  <section class="text-center bg-warning p-2">
-    <h2 id="offer-title">Oferta del día: Pan amasado recién horneado</h2>
-  </section>
+  <!-- ==========================================
+       NUESTRA CARTA (PRODUCTOS)
+       ========================================== -->
+  <main class="container my-5" id="carta">
+    <div class="text-center mb-5">
+      <h2 class="display-5 fw-bold text-dark">Nuestra Carta</h2>
+      <p class="text-muted">Descubre nuestros productos horneados con amor y tradición.</p>
+    </div>
 
-  <main class="container my-4">
-    <!-- Categorías -->
-    <section class="row text-center mb-4">
-      <div class="col-md-4"><button id="cat-panes" class="btn btn-primary w-100 mb-2">Panes</button></div>
-      <div class="col-md-4"><button id="cat-pasteles" class="btn btn-primary w-100 mb-2">Pasteles</button></div>
-      <div class="col-md-4"><button id="cat-facturas" class="btn btn-primary w-100 mb-2">Facturas</button></div>
-    </section>
-
-    <!-- Contenedor Carrusel / Productos -->
-    <section>
-      <h3>Productos en Galería</h3>
-      <div id="product-slider-container" class="slider-container"></div>
-    </section>
-
-    <!-- Formulario de Contacto -->
-    <section class="mt-5">
-      <h3>Contacto</h3>
-      <form id="contact-form" class="col-md-6">
-        <div class="mb-3">
-          <label for="contact-name" class="form-label">Nombre</label>
-          <input type="text" id="contact-name" class="form-control">
-        </div>
-        <div class="mb-3">
-          <label for="contact-email" class="form-label">Email</label>
-          <input type="email" id="contact-email" class="form-control">
-        </div>
-        <div class="mb-3">
-          <label for="contact-message" class="form-label">Mensaje</label>
-          <textarea id="contact-message" class="form-control" rows="3"></textarea>
-        </div>
-        <button type="submit" class="btn btn-success">Enviar Mensaje</button>
-      </form>
-    </section>
+    <!-- Contenedor donde slider.js inyectará las tarjetas de productos -->
+    <div id="product-slider-container" class="row g-4 justify-content-center">
+      <!-- Las cards de productos se generarán aquí mediante JavaScript -->
+    </div>
+    
+    <!-- Contenedor para el botón de cargar más productos -->
+    <div id="btn-container" class="text-center mt-5"></div>
   </main>
 
-  <!-- Modal de Login (Bootstrap) -->
+  <!-- ==========================================
+       FOOTER (INFORMACIÓN, CONTACTO Y DIRECCIÓN)
+       ========================================== -->
+  <footer class="bg-dark text-light py-5 mt-5" id="contacto">
+    <div class="container">
+      <div class="row gy-4">
+        
+        <!-- Columna 1: Descripción -->
+        <div class="col-lg-4 col-md-6">
+          <h4 class="text-warning mb-3">🥐 Dulce Hogar</h4>
+          <p class="text-secondary">
+            Somos una panadería artesanal con más de 20 años de experiencia. Nuestro compromiso es llevar a tu mesa el sabor del verdadero pan tradicional, horneado diariamente con ingredientes 100% naturales.
+          </p>
+        </div>
+
+        <!-- Columna 2: Enlaces Rápidos -->
+        <div class="col-lg-4 col-md-6">
+          <h5 class="text-white mb-3">Enlaces Rápidos</h5>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="index.html" class="text-secondary text-decoration-none hover-text-white">Inicio</a></li>
+            <li class="mb-2"><a href="#carta" class="text-secondary text-decoration-none hover-text-white">Nuestra Carta</a></li>
+            <li class="mb-2"><a href="carrito.html" class="text-secondary text-decoration-none hover-text-white">Ver Carrito</a></li>
+            <li class="mb-2"><a href="#" class="text-secondary text-decoration-none hover-text-white" data-bs-toggle="modal" data-bs-target="#loginModal">Iniciar Sesión</a></li>
+          </ul>
+        </div>
+
+        <!-- Columna 3: Contacto y Dirección -->
+        <div class="col-lg-4 col-md-12">
+          <h5 class="text-white mb-3">Contacto y Ubicación</h5>
+          <ul class="list-unstyled text-secondary">
+            <li class="mb-2"><strong>📍 Dirección:</strong> Av. Providencia 1234, Santiago, Chile.</li>
+            <li class="mb-2"><strong>📞 Teléfono:</strong> +56 2 2345 6789</li>
+            <li class="mb-2"><strong>✉️ Email:</strong> contacto@dulcehogar.cl</li>
+            <li class="mb-2"><strong>🕒 Horario:</strong> Lunes a Sábado de 07:00 a 20:00 hrs.</li>
+          </ul>
+        </div>
+        
+      </div>
+      
+      <hr class="border-secondary my-4">
+      
+      <div class="text-center text-secondary">
+        <small>&copy; 2026 Panadería Dulce Hogar. Todos los derechos reservados.</small>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal de Login (Opcional, mantenido de tu script original) -->
   <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -75,13 +159,14 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn btn-warning">Ingresar</button>
+            <button type="submit" class="btn btn-warning w-100">Ingresar</button>
           </div>
         </form>
       </div>
     </div>
   </div>
 
+  <!-- Scripts de Bootstrap y aplicación -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script type="module" src="js/app.js"></script>
 </body>
