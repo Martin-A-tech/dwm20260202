@@ -5,6 +5,7 @@ export const initLoginForm = () => {
 
   if (!loginForm || !emailInput || !passwordInput) return;
 
+  // Efectos visuales que ya tenías
   emailInput.addEventListener('focus', () => {
     emailInput.style.border = '2px solid #f59e0b';
     emailInput.style.boxShadow = '0 0 5px rgba(245, 158, 11, 0.5)';
@@ -15,13 +16,14 @@ export const initLoginForm = () => {
     emailInput.style.boxShadow = 'none';
   });
 
-  loginForm.addEventListener('submit', (event) => {
+  // Lógica de Login Real conectada al API Gateway
+  loginForm.addEventListener('submit', async (event) => {
     event.preventDefault();
 
-    try {
-      const emailValue = emailInput.value.trim();
-      const passwordValue = passwordInput.value;
+    const emailValue = emailInput.value.trim();
+    const passwordValue = passwordInput.value;
 
+    try {
       if (!emailValue.includes('@') || !emailValue.includes('.')) {
         throw new Error('El correo electrónico debe ser válido.');
       }
@@ -29,7 +31,24 @@ export const initLoginForm = () => {
         throw new Error('La contraseña debe tener al menos 6 caracteres.');
       }
 
-      alert(`¡Bienvenido a Dulce Hogar!\nSesión iniciada con: ${emailValue}`);
+      // Petición al Gateway (Puerto 8000)
+      const response = await fetch('http://localhost:8000/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: emailValue, password: passwordValue })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.detail || 'Credenciales incorrectas');
+      }
+
+      // Guardamos el token y el correo para usarlos en el carrito
+      localStorage.setItem('dulceHogarToken', data.access_token);
+      localStorage.setItem('dulceHogarEmail', emailValue);
+
+      alert(`¡Bienvenido a Dulce Hogar!\nSesión iniciada como: ${data.rol}`);
 
       const modalElement = document.getElementById('loginModal');
       if (modalElement && window.bootstrap) {
@@ -40,7 +59,7 @@ export const initLoginForm = () => {
       loginForm.reset();
 
     } catch (error) {
-      alert(`❌ Error de validación: ${error.message}`);
+      alert(`Error de acceso: ${error.message}`);
     }
   });
 };
