@@ -43,7 +43,7 @@ class ClientOut(BaseModel):
     nombre: str
     email: str
 
-@app.post("/clients", response_model=ClientOut, dependencies=[Depends(verify_gateway)])
+@app.post("/clients", response_model=ClientOut, status_code=201, dependencies=[Depends(verify_gateway)])
 async def create_client(client_data: ClientIn):
     # Verificar si el correo ya existe
     existe = await collection.find_one({"email": client_data.email})
@@ -55,7 +55,12 @@ async def create_client(client_data: ClientIn):
     return ClientOut(id=str(doc["_id"]), nombre=doc["nombre"], email=doc["email"])
 
 @app.get("/clients/{email}", response_model=ClientOut, dependencies=[Depends(verify_gateway)])
-async def get_client(email: str):
+async def get_client(email: str, x_authenticated_user: str = Header(None)):
+    # 1. Verificamos que el usuario autenticado sea el mismo dueño del perfil
+    if not x_authenticated_user or x_authenticated_user != email:
+        raise HTTPException(status_code=403, detail="No tienes permiso para ver este perfil")
+    
+    # 2. Buscamos al cliente
     doc = await collection.find_one({"email": email})
     if not doc:
         raise HTTPException(status_code=404, detail="Cliente no encontrado")

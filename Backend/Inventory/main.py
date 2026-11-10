@@ -74,3 +74,26 @@ async def create_product(product: ProductIn):
     res = await collection.insert_one(product.model_dump())
     doc = await collection.find_one({"_id": res.inserted_id})
     return doc_to_product(doc)
+
+@app.put("/products/{product_id}", response_model=ProductOut, dependencies=[Depends(verify_gateway)])
+async def update_product(product_id: str, product: ProductIn):
+    # Validar que el ID tenga formato de MongoDB
+    if not ObjectId.is_valid(product_id):
+        raise HTTPException(status_code=400, detail="ID de producto inválido")
+        
+    res = await collection.replace_one({"_id": ObjectId(product_id)}, product.model_dump())
+    if res.matched_count == 0:
+        raise HTTPException(status_code=404, detail="Producto no encontrado")
+        
+    doc = await collection.find_one({"_id": ObjectId(product_id)})
+    return doc_to_product(doc)
+
+@app.delete("/products/{product_id}", status_code=204, dependencies=[Depends(verify_gateway)])
+async def delete_product(product_id: str):
+    if not ObjectId.is_valid(product_id):
+        raise HTTPException(status_code=400, detail="ID de producto inválido")
+        
+    res = await collection.delete_one({"_id": ObjectId(product_id)})
+    if res.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Producto no encontrado")
+    return None

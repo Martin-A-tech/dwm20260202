@@ -1,6 +1,7 @@
 import contextlib
 import os
 import secrets
+import httpx
 from fastapi import FastAPI, HTTPException, Header, Depends
 from motor.motor_asyncio import AsyncIOMotorClient
 from pydantic import BaseModel
@@ -45,7 +46,30 @@ class PaymentOut(BaseModel):
 
 @app.post("/payments", response_model=PaymentOut, dependencies=[Depends(verify_gateway)])
 async def process_payment(payment: PaymentIn):
-    # Simulamos que el pago fue aprobado
+    # 1. Consultar el pedido real al microservicio de orders
+    async with httpx.AsyncClient() as client_http:
+        try:
+            res = await client_http.get(
+                f"http://127.0.0.1:9400/orders/id/{payment.order_id}",
+                headers={"X-Gateway-Secret": INTERNAL_GATEWAY_SECRET}
+            )
+            if res.status_code != 200:
+                raise HTTPException(status_code=404, detail="Pedido no encontrado")
+            
+            order_data = res.json()
+            monto_real = order_data.get("total")
+
+            # 2. Validar que el monto enviado no esté alterado
+            if payment.monto != monto_real:
+                raise HTTPException(
+                    status_code=400, 
+                    detail=f"Monto incorrecto. El total real del pedido es {monto_real}"
+                )
+                
+        except httpx.RequestError:
+            raise HTTPException(status_code=502, detail="Error al conectar con Orders")
+
+    # 3. Si el monto es correcto, procesar el pago
     nuevo_pago = {
         "order_id": payment.order_id,
         "monto": payment.monto,
